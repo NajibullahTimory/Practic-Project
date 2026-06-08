@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Work List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <h2 class="logo">📋 WorkList</h2>
+    <button onclick="openPanel()">⚙ Settings</button>
+  </div>
+
+  <!-- SETTINGS PANEL (hidden by default) -->
+  <div id="panel" class="panel">
+    <div class="panel-box">
+
+      <button class="close-btn" onclick="closePanel()">✕ Close</button>
+
+      <h3>🎨 Change Background</h3>
+      <div class="bg-buttons">
+        <button onclick="setBg('./img/g.jpg')">🖼️ Style A</button>
+        <button onclick="setBg('./img/h.jpg')">🖼️ Style B</button>
+        <button onclick="setBg('./img/i.jpg')">🖼️ Style D</button>
+        <button onclick="setBg('./img/k.jpg')">🖼️ Style C</button>
+        <button onclick="setBg('./img/e.jpg')">🖼️ Style E</button>
+        <button onclick="setBg('./img/b.jpg')">🖼️ Style F</button>
+      </div>
+
+      <hr>
+
+      <h3>➕ Add New Task</h3>
+      <input id="day"   placeholder="Day (e.g. Monday)" /><br>
+      <input id="time"  placeholder="Time (e.g. 8-10)" /><br>
+      <input id="work"  placeholder="What's the task?" /><br>
+      <input id="photo" placeholder="Photo URL (optional)" /><br>
+      <button class="add-btn" onclick="addTask()">Add Task</button>
+
+    </div>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div class="main">
+    <h1>My <span>Schedule</span></h1>
+    <p class="subtitle">Your daily work planner</p>
+    <div id="cards"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

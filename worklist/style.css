@@ -1,0 +1,277 @@
+/* ---- PAGE ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  min-height: 100vh;
+  color: white;
+}
+
+/* ---- TOP BAR ---- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  color: #d4a843;
+  font-size: 1.3rem;
+}
+
+.topbar button {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.topbar button:hover {
+  background: #d4a843;
+  color: black;
+}
+
+/* ---- PANEL (dark overlay + box) ---- */
+/* hidden until opened */
+.panel {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
+
+.panel-box {
+  background: #0f1228;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  width: 340px;
+  height: 100%;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.panel-box h3 {
+  color: #d4a843;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 22px;
+  font-size: 0.85rem;
+}
+
+.close-btn:hover {
+  background: rgba(255, 80, 80, 0.3);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+}
+
+/* ---- BACKGROUND BUTTONS ---- */
+.bg-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.bg-buttons button {
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.bg-buttons button:hover {
+  border-color: #d4a843;
+  background: rgba(212, 168, 67, 0.15);
+}
+
+/* ---- FORM INPUTS ---- */
+input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+input:focus {
+  outline: none;
+  border-color: #d4a843;
+}
+
+.add-btn {
+  width: 100%;
+  background: #d4a843;
+  color: black;
+  border: none;
+  padding: 11px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.add-btn:hover {
+  background: #f0c96a;
+}
+
+/* ---- MAIN CONTENT ---- */
+.main {
+  padding: 50px 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.main h1 {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+}
+
+.main h1 span {
+  color: #d4a843;
+  font-style: italic;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* ---- CARDS ---- */
+#cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  corner-shape: scoop;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 168, 67, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-no-img {
+  width: 100%;
+  height: 160px;
+  background: rgba(212, 168, 67, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+.card-no-img:hover {
+  transition: 0.5s;
+  border-radius: 10% 40% 10% 40%;
+}
+
+img:hover {
+  transition: 0.5s;
+  border-radius: 10% 40% 10% 40%;
+}
+
+.card-body {
+  padding: 16px 18px 18px;
+}
+
+.card-day {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.card-time {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #d4a843;
+  background: rgba(212, 168, 67, 0.12);
+  border: 1px solid rgba(212, 168, 67, 0.25);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.card-work {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+.card-delete {
+  float: right;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+}
+
+.card-delete:hover {
+  color: #ff6b6b;
+}
+
+/* ---- EMPTY STATE ---- */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+}
