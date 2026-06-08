@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG MARKETPLACE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Chakra+Petch:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-a"></div>
+<div class="glow-b"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<!-- GREETING -->
+<div class="greeting-bar" id="greeting-bar">
+    <span id="greeting-text"></span>
+    <button onclick="document.getElementById('greeting-bar').style.display='none'">✕</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <div class="nav-logo">
+            <span class="logo-mark">⚔</span>
+            <span class="logo-text">PUBG<span class="logo-accent">MARKET</span></span>
+        </div>
+
+        <div class="search-zone">
+            <div class="search-wrap">
+                <span class="s-icon">◎</span>
+                <input type="text" id="global-search" class="search-input" placeholder="Search accounts, UC, listings...">
+                <button class="s-clear" id="search-clear" onclick="clearSearch()">✕</button>
+            </div>
+            <div class="search-drop" id="search-results"></div>
+        </div>
+
+        <div class="nav-actions">
+            <div class="nav-tabs">
+                <button class="ntab active" data-page="accounts"><span class="ntab-icon">◈</span><span>ACCOUNTS</span></button>
+                <button class="ntab" data-page="uc"><span class="ntab-icon">◉</span><span>MOBILE UC</span></button>
+                <button class="ntab" data-page="trade"><span class="ntab-icon">⇄</span><span>BUY &amp; SELL</span></button>
+            </div>
+            <div class="nav-user">
+                <span class="role-chip" id="role-badge"></span>
+                <button class="btn-exit" onclick="logout()">EXIT ▸</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- PRICE FILTER -->
+<div class="pf-bar">
+    <span class="pf-label">// PRICE FILTER</span>
+    <div class="pf-group">
+        <span>BELOW</span>
+        <input type="number" id="pf-max" placeholder="e.g. 10000" min="0">
+        <button onclick="applyMaxFilter()">APPLY</button>
+    </div>
+    <div class="pf-divider">or</div>
+    <div class="pf-group">
+        <span>FROM</span>
+        <input type="number" id="pf-min" placeholder="0" min="0">
+        <span>TO</span>
+        <input type="number" id="pf-rmax" placeholder="99999" min="0">
+        <button onclick="applyRangeFilter()">APPLY</button>
+    </div>
+    <button class="pf-reset" onclick="clearPriceFilter()">RESET</button>
+</div>
+
+<!-- ACCOUNTS PAGE -->
+<section id="accounts-page" class="pg active">
+    <div class="section-head">
+        <div class="sh-line"></div>
+        <div class="sh-content">
+            <div class="sh-tag">// SECTION 01</div>
+            <h2>PUBG ACCOUNTS</h2>
+            <p>Buy &amp; Sell Official Server Accounts · White Team</p>
+        </div>
+        <div class="sh-deco">ACCOUNTS</div>
+    </div>
+    <div class="container">
+        <div class="form-panel" id="acc-form-panel">
+            <div class="fp-head"><span class="fp-tag">// LIST ACCOUNT</span></div>
+            <form id="account-form">
+                <div class="fg"><label>Account ID / Username</label><input type="text" id="acc-username" required></div>
+                <div class="fg-row">
+                    <div class="fg"><label>Collection</label><input type="number" id="acc-rank" required></div>
+                    <div class="fg"><label>Level</label><input type="number" id="acc-level" required></div>
+                </div>
+                <div class="fg"><label>Skins / Items</label><input type="text" id="acc-items"></div>
+                <div class="fg">
+                    <label>Price</label>
+                    <input type="text" id="acc-price" required oninput="calcProfit(this)">
+                    <div class="profit-badge" id="profit-badge" style="display:none"></div>
+                </div>
+                <div class="fg"><label>Description</label><textarea id="acc-description"></textarea></div>
+                <div class="media-zone">
+                    <input type="file" id="acc-media-input" accept="image/*,video/*" multiple style="display:none">
+                    <button type="button" class="btn-media" onclick="document.getElementById('acc-media-input').click()">+ ADD PHOTOS / VIDEOS</button>
+                    <div id="acc-media-previews" class="prev-grid"></div>
+                </div>
+                <button type="submit" class="btn-submit">▶ LIST ACCOUNT</button>
+            </form>
+        </div>
+        <div class="cards-grid" id="accounts-grid"></div>
+    </div>
+</section>
+
+<!-- UC PAGE -->
+<section id="uc-page" class="pg">
+    <div class="section-head uc-head">
+        <div class="sh-line uc-line"></div>
+        <div class="sh-content">
+            <div class="sh-tag">// SECTION 02</div>
+            <h2>MOBILE UC</h2>
+            <p>Top-Up Service · Black Team</p>
+        </div>
+        <div class="sh-deco">UC</div>
+    </div>
+    <div class="container">
+        <div class="form-panel uc-panel" id="uc-form-panel">
+            <div class="fp-head"><span class="fp-tag">// ADD UC PACKAGE</span></div>
+            <form id="uc-form">
+                <div class="fg"><label>Package Name</label><input type="text" id="uc-name" placeholder="e.g. 60 UC" required></div>
+                <div class="fg-row">
+                    <div class="fg"><label>UC Amount</label><input type="number" id="uc-amount" required></div>
+                    <div class="fg"><label>Price</label><input type="text" id="uc-price" required></div>
+                </div>
+                <div class="fg"><label>Mobile ID</label><input type="text" id="uc-mobile-id"></div>
+                <div class="fg"><label>Details</label><textarea id="uc-details"></textarea></div>
+                <button type="submit" class="btn-submit uc-btn">▶ ADD PACKAGE</button>
+            </form>
+        </div>
+        <div class="cards-grid" id="uc-grid"></div>
+    </div>
+</section>
+
+<!-- TRADE PAGE -->
+<section id="trade-page" class="pg">
+    <div class="section-head tr-head">
+        <div class="sh-line tr-line"></div>
+        <div class="sh-content">
+            <div class="sh-tag">// SECTION 03</div>
+            <h2>BUY &amp; SELL</h2>
+            <p>List Accounts with Photos &amp; Videos</p>
+        </div>
+        <div class="sh-deco">TRADE</div>
+    </div>
+    <div class="container">
+        <div class="form-panel tr-panel" id="trade-form-panel">
+            <div class="fp-head"><span class="fp-tag">// POST LISTING</span></div>
+            <form id="trade-form">
+                <div class="fg"><label>Account Title</label><input type="text" id="trade-title" required></div>
+                <div class="fg-row">
+                    <div class="fg"><label>Game / Platform</label><input type="text" id="trade-game" required></div>
+                    <div class="fg"><label>Price</label><input type="text" id="trade-price" required></div>
+                </div>
+                <div class="fg"><label>Contact (WhatsApp / Telegram)</label><input type="text" id="trade-contact"></div>
+                <div class="fg"><label>Account Details</label><textarea id="trade-desc"></textarea></div>
+                <div class="media-zone">
+                    <input type="file" id="media-input" accept="image/*,video/*" multiple style="display:none">
+                    <button type="button" class="btn-media tr-media" onclick="document.getElementById('media-input').click()">+ ADD PHOTOS / VIDEOS</button>
+                    <div id="media-previews" class="prev-grid"></div>
+                </div>
+                <button type="submit" class="btn-submit tr-btn">▶ POST LISTING</button>
+            </form>
+        </div>
+        <div class="cards-grid" id="trade-grid"></div>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
